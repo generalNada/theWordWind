@@ -68,6 +68,8 @@ const daySearchContainer = document.getElementById("daySearchContainer");
 const dayOfWeekDropdown = document.getElementById("dayOfWeekDropdown");
 const daySearchResults = document.getElementById("daySearchResults");
 
+
+
 // Month Search Elements
 const monthSearchContainer = document.getElementById("monthSearchContainer");
 const monthSearchMonthDropdown = document.getElementById(
@@ -892,12 +894,18 @@ function searchWordsByDayOfWeek(dayName) {
     return dayOfWeek === dayName;
   });
 
+
+
+
   // Clear previous results
   daySearchResults.innerHTML = "";
 
   if (wordsOnDay.length === 0) {
     daySearchResults.innerHTML = `<div class="day-search-summary">No words found for ${dayName}</div>`;
     closeDaySearchButton.style.display = "block";
+
+
+
     return;
   }
 
@@ -920,6 +928,20 @@ function searchWordsByDayOfWeek(dayName) {
     Average Score: ${averageScore}
   `;
   daySearchResults.appendChild(summaryDiv);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Show close button
   closeDaySearchButton.style.display = "block";
@@ -1458,6 +1480,17 @@ function clearDaySearch() {
   dayOfWeekDropdown.value = "";
   daySearchResults.innerHTML = "";
   closeDaySearchButton.style.display = "none";
+
+
+
+
+
+
+
+
+
+
+  
 }
 
 function clearMonthSearch() {
