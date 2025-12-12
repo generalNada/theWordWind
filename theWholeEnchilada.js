@@ -1354,7 +1354,7 @@ export const dailyWordsSmall = [
     'DULLY', 'DUMPY', 'DUNCE', 'DUSKY', 'DUSTY', 'DYING',   
     'EATEN', 'EATER', 'ECLAT', 'EERIE', 'EIGHT', 'EKING', 'ELECT',
     'ELEGY', 'ELFIN', 'ELIDE', 'EMBED', 'EMCEE', 'ENEMY', 
-    'ENTRY', 'ENVOY', 'ERASE', 'ERECT', 'ESTER', 'ETUDE', 'EVICT',
+    'ENTRY', 'ENVOY', 'ERECT', 'ESTER', 'ETUDE', 'EVICT',
     'EYING', 'FABLE', 'FACET', 'FAIRY', 
     'FANNY', 'FATAL', 'FATTY', 'FAUNA', 'FECAL', 'FELLA', 'FELON', 'FEMME', 'FEMUR', 'FENCE',
     'FETAL', 'FETUS', 'FICUS', 'FIERY', 
@@ -1367,7 +1367,7 @@ export const dailyWordsSmall = [
     'GIPSY', 'GIRLY', 'GIVER', 'GLINT', 'GLOSS', 
     'GODLY', 'GOLLY', 'GONAD', 'GOURD',
     'GRAPE', 'GRASS', 'GRAZE', 'GRILL', 
-    'GROPE', 'GRUNT', 'GUAVA', 'GUESS', 'GUILT',
+    'GROPE', 'GRUNT', 'GUAVA', 'GUILT',
     'GULCH', 'GUMBO', 'GUSTO', 'GUTSY', 'GYPSY', 'HALAL', 
     'HAREM', 'HARPY', 'HARRY', 'HASTY', 'HAUTE', 
     'HEDGE', 'HIPPY', 'HOIST', 
@@ -1790,7 +1790,7 @@ export const dailyWordsLarge = [
     'ENOLS', 'ENORM', 'ENOWS', 'ENROL', 'ENSEW', 'ENSKY', 'ENTIA', 'ENTRY',
     'ENURE', 'ENURN', 'ENVOI', 'ENVOY', 'ENZYM', 'EORLS', 'EOSIN', 'EPACT', 'EPEES', 'EPHAH',
     'EPHAS', 'EPHOD', 'EPHOR', 'EPICS', 'EPODE', 'EPOPT', 'EPRIS',
-    'EQUES', 'EQUID', 'ERASE', 'ERBIA', 'ERECT', 'EREVS', 'ERGON', 'ERGOS', 'ERGOT',
+    'EQUES', 'EQUID', 'ERBIA', 'ERECT', 'EREVS', 'ERGON', 'ERGOS', 'ERGOT',
     'ERHUS', 'ERICA', 'ERICK', 'ERICS', 'ERING', 'ERNED', 'ERNES', 'EROSE', 'ERRED',
     'ERSES', 'ERUCT', 'ERUGO', 'ERUVS', 'ERVEN', 'ERVIL', 'ESCAR', 'ESCOT',
     'ESILE', 'ESKAR', 'ESKER', 'ESNES', 'ESSES', 'ESTER', 'ESTOC', 'ESTOP', 'ESTRO',
@@ -1916,7 +1916,7 @@ export const dailyWordsLarge = [
     'GROWS', 'GRRLS', 'GRRRL', 'GRUBS', 'GRUED', 'GRUES', 'GRUFE',
     'GRUME', 'GRUMP', 'GRUND', 'GRUNT', 'GRYCE', 'GRYDE', 'GRYKE', 'GRYPE', 'GRYPT',
     'GUACO', 'GUANA', 'GUANS', 'GUARS', 'GUAVA', 'GUCKS', 'GUCKY', 'GUDES',
-    'GUESS', 'GUFFS', 'GUGAS', 'GUIDS', 'GUILT', 'GUIMP',
+    'GUFFS', 'GUGAS', 'GUIDS', 'GUILT', 'GUIMP',
     'GUIRO', 'GULAG', 'GULAR', 'GULAS', 'GULCH', 'GULES', 'GULET', 'GULFS', 'GULFY',
     'GULLS', 'GULPH', 'GULPS', 'GULPY', 'GUMBO', 'GUMMA', 'GUMMI', 'GUMPS',
     'GUNDY', 'GUNGE', 'GUNGY', 'GUNKS', 'GUNKY', 'GUNNY', 'GUQIN', 'GURDY', 'GURGE',
@@ -12465,6 +12465,11 @@ export const wordleWords = [
         myScore: 3,
         wordNumber: 1635,
       },  
+      { word: "GUESS",
+        gameDate: "12/11/25",
+        myScore: 3,
+        wordNumber: 1636,
+      },  
 
     
   ];
@@ -12482,7 +12487,7 @@ console.log("Push, Stash, and Pop. What the Chryste!")
 console.log("August 4, 2025, Jackwagon. Dickerson. Eff On Off Guyo.")
 console.log("August 7, 2025, CORAL hits! Now what? Scion? Rinse? Caste? But CORAL HITS!")
 console.log("August 9, 2025, Mom: Hello" )
-console.log("December 10, 2025: Trump sux dykk000000000! ERASE")
+console.log("December 11, 2025: Trump sux dykk000000000! GUESS")
 
 
 console.log(wordleWords)
