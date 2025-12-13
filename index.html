@@ -10,8 +10,6 @@
     <p id="themeToggle">🌑</p>
     <h1>The Word Winder, Man!!</h1>
     <h2 id="toggleButton">⚔ Click to View Filters ⚔</h2>
-    <h1>The Word Winder, Man!!!</h1>
-    <h2 id="toggleButton">⚔ Click Here to View Filters ⚔</h2>
 
     <!-- Day of Week Search Section -->
     <div id="daySearchContainer" style="display: none">
@@ -35,6 +33,13 @@
         <option value="Saturday">Saturday</option>
         <option value="Sunday">Sunday</option>
       </select>
+      <button
+        id="daySearchSortButton"
+        class="day-search-sort-button"
+        style="display: none"
+      >
+        Sort Alphabetically
+      </button>
       <div id="daySearchResults"></div>
     </div>
 
@@ -72,6 +77,13 @@
           <option value="all">All Years</option>
         </select>
       </div>
+      <button
+        id="monthSearchSortButton"
+        class="month-search-sort-button"
+        style="display: none"
+      >
+        Sort Alphabetically
+      </button>
       <div id="monthSearchResults"></div>
     </div>
 
@@ -90,6 +102,13 @@
       <select id="dayNumberDropdown">
         <option value="">Select Day (1-31)</option>
       </select>
+      <button
+        id="dayNumberSearchSortButton"
+        class="day-number-search-sort-button"
+        style="display: none"
+      >
+        Sort Alphabetically
+      </button>
       <div id="dayNumberSearchResults"></div>
     </div>
 
@@ -125,6 +144,13 @@
           <option value="">Select Day</option>
         </select>
       </div>
+      <button
+        id="monthDaySearchSortButton"
+        class="month-day-search-sort-button"
+        style="display: none"
+      >
+        Sort Alphabetically
+      </button>
       <div id="monthDaySearchResults"></div>
     </div>
 
@@ -157,6 +183,13 @@
           </select>
         </div>
       </div>
+      <button
+        id="letterSearchSortButton"
+        class="letter-search-sort-button"
+        style="display: none"
+      >
+        Sort by Date
+      </button>
       <div id="letterSearchResults"></div>
     </div>
 
@@ -185,6 +218,13 @@
           <option value="5">5</option>
         </select>
       </div>
+      <button
+        id="containLetterSearchSortButton"
+        class="contain-letter-search-sort-button"
+        style="display: none"
+      >
+        Sort by Date
+      </button>
       <div id="containLetterSearchResults"></div>
     </div>
 

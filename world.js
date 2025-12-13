@@ -67,6 +67,12 @@ let currentlyShownWordNumber = null;
 const daySearchContainer = document.getElementById("daySearchContainer");
 const dayOfWeekDropdown = document.getElementById("dayOfWeekDropdown");
 const daySearchResults = document.getElementById("daySearchResults");
+const daySearchSortButton = document.getElementById("daySearchSortButton");
+
+// Day search sort state
+let daySearchSortMode = "date"; // "date" or "alphabetical"
+let currentDaySearchWords = [];
+let currentDaySearchSummary = null;
 
 
 
@@ -79,6 +85,12 @@ const monthSearchYearDropdown = document.getElementById(
   "monthSearchYearDropdown"
 );
 const monthSearchResults = document.getElementById("monthSearchResults");
+const monthSearchSortButton = document.getElementById("monthSearchSortButton");
+
+// Month search sort state
+let monthSearchSortMode = "date"; // "date" or "alphabetical"
+let currentMonthSearchWords = [];
+let currentMonthSearchSummary = null;
 
 // Day Number Search Elements
 const dayNumberSearchContainer = document.getElementById(
@@ -88,6 +100,14 @@ const dayNumberDropdown = document.getElementById("dayNumberDropdown");
 const dayNumberSearchResults = document.getElementById(
   "dayNumberSearchResults"
 );
+const dayNumberSearchSortButton = document.getElementById(
+  "dayNumberSearchSortButton"
+);
+
+// Day number search sort state
+let dayNumberSearchSortMode = "date"; // "date" or "alphabetical"
+let currentDayNumberSearchWords = [];
+let currentDayNumberSearchSummary = null;
 
 // Month/Day Search Elements
 const monthDaySearchContainer = document.getElementById(
@@ -96,6 +116,14 @@ const monthDaySearchContainer = document.getElementById(
 const monthDropdown = document.getElementById("monthDropdown");
 const monthDayDropdown = document.getElementById("monthDayDropdown");
 const monthDaySearchResults = document.getElementById("monthDaySearchResults");
+const monthDaySearchSortButton = document.getElementById(
+  "monthDaySearchSortButton"
+);
+
+// Month/Day search sort state
+let monthDaySearchSortMode = "date"; // "date" or "alphabetical"
+let currentMonthDaySearchWords = [];
+let currentMonthDaySearchSummary = null;
 
 // Letter Search Elements
 const letterSearchContainer = document.getElementById("letterSearchContainer");
@@ -105,6 +133,12 @@ const letterRangeControls = document.getElementById("letterRangeControls");
 const letterRangeStart = document.getElementById("letterRangeStart");
 const letterRangeEnd = document.getElementById("letterRangeEnd");
 const letterSearchResults = document.getElementById("letterSearchResults");
+const letterSearchSortButton = document.getElementById("letterSearchSortButton");
+
+// Letter search sort state
+let letterSearchSortMode = "alphabetical"; // "alphabetical" or "date"
+let currentLetterSearchWords = [];
+let currentLetterSearchSummary = null;
 
 // Contain Letter(s) Search Elements
 const containLetterSearchContainer = document.getElementById(
@@ -117,6 +151,14 @@ const containOccurrencesDropdown = document.getElementById(
 const containLetterSearchResults = document.getElementById(
   "containLetterSearchResults"
 );
+const containLetterSearchSortButton = document.getElementById(
+  "containLetterSearchSortButton"
+);
+
+// Contain letter search sort state
+let containLetterSearchSortMode = "alphabetical"; // "alphabetical" or "date"
+let currentContainLetterSearchWords = [];
+let currentContainLetterSearchSummary = null;
 
 // Daily Words Search Elements
 const dailyWordsSearchContainer = document.getElementById(
@@ -410,20 +452,104 @@ closeDaySearchButton.addEventListener("click", () => {
   clearDaySearch();
 });
 
+// Day search sort button event listener
+daySearchSortButton.addEventListener("click", () => {
+  // Toggle between date and alphabetical sort
+  if (daySearchSortMode === "date") {
+    daySearchSortMode = "alphabetical";
+    daySearchSortButton.textContent = "Sort by Date";
+  } else {
+    daySearchSortMode = "date";
+    daySearchSortButton.textContent = "Sort Alphabetically";
+  }
+  // Re-render words with new sort mode
+  renderDaySearchWords();
+});
+
+// Month search sort button event listener
+monthSearchSortButton.addEventListener("click", () => {
+  // Toggle between date and alphabetical sort
+  if (monthSearchSortMode === "date") {
+    monthSearchSortMode = "alphabetical";
+    monthSearchSortButton.textContent = "Sort by Date";
+  } else {
+    monthSearchSortMode = "date";
+    monthSearchSortButton.textContent = "Sort Alphabetically";
+  }
+  // Re-render words with new sort mode
+  renderMonthSearchWords();
+});
+
 closeMonthSearchButton.addEventListener("click", () => {
   clearMonthSearch();
+});
+
+// Day number search sort button event listener
+dayNumberSearchSortButton.addEventListener("click", () => {
+  // Toggle between date and alphabetical sort
+  if (dayNumberSearchSortMode === "date") {
+    dayNumberSearchSortMode = "alphabetical";
+    dayNumberSearchSortButton.textContent = "Sort by Date";
+  } else {
+    dayNumberSearchSortMode = "date";
+    dayNumberSearchSortButton.textContent = "Sort Alphabetically";
+  }
+  // Re-render words with new sort mode
+  renderDayNumberSearchWords();
 });
 
 closeDayNumberSearchButton.addEventListener("click", () => {
   clearDayNumberSearch();
 });
 
+// Month/Day search sort button event listener
+monthDaySearchSortButton.addEventListener("click", () => {
+  // Toggle between date and alphabetical sort
+  if (monthDaySearchSortMode === "date") {
+    monthDaySearchSortMode = "alphabetical";
+    monthDaySearchSortButton.textContent = "Sort by Date";
+  } else {
+    monthDaySearchSortMode = "date";
+    monthDaySearchSortButton.textContent = "Sort Alphabetically";
+  }
+  // Re-render words with new sort mode
+  renderMonthDaySearchWords();
+});
+
 closeMonthDaySearchButton.addEventListener("click", () => {
   clearMonthDaySearch();
 });
 
+// Letter search sort button event listener
+letterSearchSortButton.addEventListener("click", () => {
+  // Toggle between alphabetical and date sort
+  if (letterSearchSortMode === "alphabetical") {
+    letterSearchSortMode = "date";
+    letterSearchSortButton.textContent = "Sort Alphabetically";
+  } else {
+    letterSearchSortMode = "alphabetical";
+    letterSearchSortButton.textContent = "Sort by Date";
+  }
+  // Re-render words with new sort mode
+  renderLetterSearchWords();
+});
+
 closeLetterSearchButton.addEventListener("click", () => {
   clearLetterSearch();
+});
+
+// Contain letter search sort button event listener
+containLetterSearchSortButton.addEventListener("click", () => {
+  // Toggle between alphabetical and date sort
+  if (containLetterSearchSortMode === "alphabetical") {
+    containLetterSearchSortMode = "date";
+    containLetterSearchSortButton.textContent = "Sort Alphabetically";
+  } else {
+    containLetterSearchSortMode = "alphabetical";
+    containLetterSearchSortButton.textContent = "Sort by Date";
+  }
+  // Re-render words with new sort mode
+  renderContainLetterSearchWords();
 });
 
 closeContainLetterSearchButton.addEventListener("click", () => {
@@ -894,8 +1020,11 @@ function searchWordsByDayOfWeek(dayName) {
     return dayOfWeek === dayName;
   });
 
+  // Store filtered words for sorting
+  currentDaySearchWords = [...wordsOnDay];
 
-
+  // Reset to date sort mode for new searches
+  daySearchSortMode = "date";
 
   // Clear previous results
   daySearchResults.innerHTML = "";
@@ -903,9 +1032,8 @@ function searchWordsByDayOfWeek(dayName) {
   if (wordsOnDay.length === 0) {
     daySearchResults.innerHTML = `<div class="day-search-summary">No words found for ${dayName}</div>`;
     closeDaySearchButton.style.display = "block";
-
-
-
+    daySearchSortButton.style.display = "none";
+    currentDaySearchSummary = null;
     return;
   }
 
@@ -919,15 +1047,8 @@ function searchWordsByDayOfWeek(dayName) {
         ).toFixed(2)
       : "N/A";
 
-  // Add summary
-  const summaryDiv = document.createElement("div");
-  summaryDiv.className = "day-search-summary";
-  summaryDiv.innerHTML = `
-    <strong>${dayName}s:</strong> ${wordsOnDay.length} total words | 
-    ${playedWords.length} played | 
-    Average Score: ${averageScore}
-  `;
-  daySearchResults.appendChild(summaryDiv);
+  // Store summary for rendering
+  // (Summary will be rendered in renderDaySearchWords)
 
 
 
@@ -946,11 +1067,53 @@ function searchWordsByDayOfWeek(dayName) {
   // Show close button
   closeDaySearchButton.style.display = "block";
 
-  // Sort words by date (newest first)
-  wordsOnDay.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  // Store summary
+  currentDaySearchSummary = {
+    dayName: dayName,
+    totalWords: wordsOnDay.length,
+    playedWords: playedWords.length,
+    averageScore: averageScore
+  };
+
+  // Show close button and sort button
+  closeDaySearchButton.style.display = "block";
+  daySearchSortButton.style.display = "block";
+
+  // Render words based on current sort mode
+  renderDaySearchWords();
+}
+
+function renderDaySearchWords() {
+  if (!currentDaySearchSummary || currentDaySearchWords.length === 0) {
+    return;
+  }
+
+  // Clear previous results but keep structure
+  daySearchResults.innerHTML = "";
+
+  // Re-add summary
+  const summaryDiv = document.createElement("div");
+  summaryDiv.className = "day-search-summary";
+  summaryDiv.innerHTML = `
+    <strong>${currentDaySearchSummary.dayName}s:</strong> ${currentDaySearchSummary.totalWords} total words | 
+    ${currentDaySearchSummary.playedWords} played | 
+    Average Score: ${currentDaySearchSummary.averageScore}
+  `;
+  daySearchResults.appendChild(summaryDiv);
+
+  // Create a copy for sorting
+  const sortedWords = [...currentDaySearchWords];
+
+  // Sort based on current mode
+  if (daySearchSortMode === "alphabetical") {
+    sortedWords.sort((a, b) => a.word.localeCompare(b.word));
+  } else {
+    // Sort by date (newest first) - default
+    sortedWords.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  }
 
   // Create word buttons
-  wordsOnDay.forEach((entry) => {
+  sortedWords.forEach((entry) => {
     const wordButton = document.createElement("button");
     wordButton.className = "day-word-button";
 
@@ -1085,6 +1248,12 @@ function searchWordsByMonth(selectedMonth, selectedYear) {
     });
   }
 
+  // Store filtered words for sorting
+  currentMonthSearchWords = [...wordsFiltered];
+
+  // Reset to date sort mode for new searches
+  monthSearchSortMode = "date";
+
   // Clear previous results
   monthSearchResults.innerHTML = "";
 
@@ -1110,6 +1279,8 @@ function searchWordsByMonth(selectedMonth, selectedYear) {
     const yearText = selectedYear === "all" ? "All Years" : selectedYear;
     monthSearchResults.innerHTML = `<div class="month-search-summary">No words found for ${monthName} ${yearText}</div>`;
     closeMonthSearchButton.style.display = "block";
+    monthSearchSortButton.style.display = "none";
+    currentMonthSearchSummary = null;
     return;
   }
 
@@ -1144,23 +1315,54 @@ function searchWordsByMonth(selectedMonth, selectedYear) {
       : monthNames[parseInt(selectedMonth)];
   const yearText = selectedYear === "all" ? "All Years" : selectedYear;
 
+  // Store summary
+  currentMonthSearchSummary = {
+    monthName: monthName,
+    yearText: yearText,
+    totalWords: wordsFiltered.length,
+    playedWords: playedWords.length,
+    averageScore: averageScore
+  };
+
+  // Show close button and sort button
+  closeMonthSearchButton.style.display = "block";
+  monthSearchSortButton.style.display = "block";
+
+  // Render words based on current sort mode
+  renderMonthSearchWords();
+}
+
+function renderMonthSearchWords() {
+  if (!currentMonthSearchSummary || currentMonthSearchWords.length === 0) {
+    return;
+  }
+
+  // Clear previous results but keep structure
+  monthSearchResults.innerHTML = "";
+
+  // Re-add summary
   const summaryDiv = document.createElement("div");
   summaryDiv.className = "month-search-summary";
   summaryDiv.innerHTML = `
-    <strong>${monthName} ${yearText}:</strong> ${wordsFiltered.length} total words | 
-    ${playedWords.length} played | 
-    Average Score: ${averageScore}
+    <strong>${currentMonthSearchSummary.monthName} ${currentMonthSearchSummary.yearText}:</strong> ${currentMonthSearchSummary.totalWords} total words | 
+    ${currentMonthSearchSummary.playedWords} played | 
+    Average Score: ${currentMonthSearchSummary.averageScore}
   `;
   monthSearchResults.appendChild(summaryDiv);
 
-  // Show close button
-  closeMonthSearchButton.style.display = "block";
+  // Create a copy for sorting
+  const sortedWords = [...currentMonthSearchWords];
 
-  // Sort words by date (newest first)
-  wordsFiltered.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  // Sort based on current mode
+  if (monthSearchSortMode === "alphabetical") {
+    sortedWords.sort((a, b) => a.word.localeCompare(b.word));
+  } else {
+    // Sort by date (newest first) - default
+    sortedWords.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  }
 
   // Create word buttons
-  wordsFiltered.forEach((entry) => {
+  sortedWords.forEach((entry) => {
     const wordButton = document.createElement("button");
     wordButton.className = "month-word-button";
 
@@ -1228,12 +1430,20 @@ function searchWordsByDayNumber(dayNumber) {
     return date.getDate() === dayNumber;
   });
 
+  // Store filtered words for sorting
+  currentDayNumberSearchWords = [...wordsOnDay];
+
+  // Reset to date sort mode for new searches
+  dayNumberSearchSortMode = "date";
+
   // Clear previous results
   dayNumberSearchResults.innerHTML = "";
 
   if (wordsOnDay.length === 0) {
     dayNumberSearchResults.innerHTML = `<div class="day-number-search-summary">No words found for day ${dayNumber} of any month</div>`;
     closeDayNumberSearchButton.style.display = "block";
+    dayNumberSearchSortButton.style.display = "none";
+    currentDayNumberSearchSummary = null;
     return;
   }
 
@@ -1247,24 +1457,53 @@ function searchWordsByDayNumber(dayNumber) {
         ).toFixed(2)
       : "N/A";
 
-  // Add summary
+  // Store summary
+  currentDayNumberSearchSummary = {
+    dayNumber: dayNumber,
+    totalWords: wordsOnDay.length,
+    playedWords: playedWords.length,
+    averageScore: averageScore
+  };
+
+  // Show close button and sort button
+  closeDayNumberSearchButton.style.display = "block";
+  dayNumberSearchSortButton.style.display = "block";
+
+  // Render words based on current sort mode
+  renderDayNumberSearchWords();
+}
+
+function renderDayNumberSearchWords() {
+  if (!currentDayNumberSearchSummary || currentDayNumberSearchWords.length === 0) {
+    return;
+  }
+
+  // Clear previous results but keep structure
+  dayNumberSearchResults.innerHTML = "";
+
+  // Re-add summary
   const summaryDiv = document.createElement("div");
   summaryDiv.className = "day-number-search-summary";
   summaryDiv.innerHTML = `
-    <strong>Day ${dayNumber}:</strong> ${wordsOnDay.length} total words | 
-    ${playedWords.length} played | 
-    Average Score: ${averageScore}
+    <strong>Day ${currentDayNumberSearchSummary.dayNumber}:</strong> ${currentDayNumberSearchSummary.totalWords} total words | 
+    ${currentDayNumberSearchSummary.playedWords} played | 
+    Average Score: ${currentDayNumberSearchSummary.averageScore}
   `;
   dayNumberSearchResults.appendChild(summaryDiv);
 
-  // Show close button
-  closeDayNumberSearchButton.style.display = "block";
+  // Create a copy for sorting
+  const sortedWords = [...currentDayNumberSearchWords];
 
-  // Sort words by date (newest first)
-  wordsOnDay.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  // Sort based on current mode
+  if (dayNumberSearchSortMode === "alphabetical") {
+    sortedWords.sort((a, b) => a.word.localeCompare(b.word));
+  } else {
+    // Sort by date (newest first) - default
+    sortedWords.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  }
 
   // Create word buttons
-  wordsOnDay.forEach((entry) => {
+  sortedWords.forEach((entry) => {
     const wordButton = document.createElement("button");
     wordButton.className = "day-number-word-button";
 
@@ -1345,6 +1584,12 @@ function searchWordsByMonthDay(monthNumber, dayNumber) {
     return date.getMonth() === monthNumber && date.getDate() === dayNumber;
   });
 
+  // Store filtered words for sorting
+  currentMonthDaySearchWords = [...wordsOnMonthDay];
+
+  // Reset to date sort mode for new searches
+  monthDaySearchSortMode = "date";
+
   // Clear previous results
   monthDaySearchResults.innerHTML = "";
 
@@ -1367,6 +1612,8 @@ function searchWordsByMonthDay(monthNumber, dayNumber) {
   if (wordsOnMonthDay.length === 0) {
     monthDaySearchResults.innerHTML = `<div class="month-day-search-summary">No words found for ${monthName} ${dayNumber}</div>`;
     closeMonthDaySearchButton.style.display = "block";
+    monthDaySearchSortButton.style.display = "none";
+    currentMonthDaySearchSummary = null;
     return;
   }
 
@@ -1380,24 +1627,54 @@ function searchWordsByMonthDay(monthNumber, dayNumber) {
         ).toFixed(2)
       : "N/A";
 
-  // Add summary
+  // Store summary
+  currentMonthDaySearchSummary = {
+    monthName: monthName,
+    dayNumber: dayNumber,
+    totalWords: wordsOnMonthDay.length,
+    playedWords: playedWords.length,
+    averageScore: averageScore
+  };
+
+  // Show close button and sort button
+  closeMonthDaySearchButton.style.display = "block";
+  monthDaySearchSortButton.style.display = "block";
+
+  // Render words based on current sort mode
+  renderMonthDaySearchWords();
+}
+
+function renderMonthDaySearchWords() {
+  if (!currentMonthDaySearchSummary || currentMonthDaySearchWords.length === 0) {
+    return;
+  }
+
+  // Clear previous results but keep structure
+  monthDaySearchResults.innerHTML = "";
+
+  // Re-add summary
   const summaryDiv = document.createElement("div");
   summaryDiv.className = "month-day-search-summary";
   summaryDiv.innerHTML = `
-    <strong>${monthName} ${dayNumber}:</strong> ${wordsOnMonthDay.length} total words | 
-    ${playedWords.length} played | 
-    Average Score: ${averageScore}
+    <strong>${currentMonthDaySearchSummary.monthName} ${currentMonthDaySearchSummary.dayNumber}:</strong> ${currentMonthDaySearchSummary.totalWords} total words | 
+    ${currentMonthDaySearchSummary.playedWords} played | 
+    Average Score: ${currentMonthDaySearchSummary.averageScore}
   `;
   monthDaySearchResults.appendChild(summaryDiv);
 
-  // Show close button
-  closeMonthDaySearchButton.style.display = "block";
+  // Create a copy for sorting
+  const sortedWords = [...currentMonthDaySearchWords];
 
-  // Sort words by year (newest first)
-  wordsOnMonthDay.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  // Sort based on current mode
+  if (monthDaySearchSortMode === "alphabetical") {
+    sortedWords.sort((a, b) => a.word.localeCompare(b.word));
+  } else {
+    // Sort by date (newest first) - default
+    sortedWords.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  }
 
   // Create word buttons
-  wordsOnMonthDay.forEach((entry) => {
+  sortedWords.forEach((entry) => {
     const wordButton = document.createElement("button");
     wordButton.className = "month-day-word-button";
 
@@ -1480,6 +1757,11 @@ function clearDaySearch() {
   dayOfWeekDropdown.value = "";
   daySearchResults.innerHTML = "";
   closeDaySearchButton.style.display = "none";
+  daySearchSortButton.style.display = "none";
+  daySearchSortMode = "date";
+  currentDaySearchWords = [];
+  currentDaySearchSummary = null;
+  daySearchSortButton.textContent = "Sort Alphabetically";
 
 
 
@@ -1498,12 +1780,22 @@ function clearMonthSearch() {
   monthSearchYearDropdown.value = "";
   monthSearchResults.innerHTML = "";
   closeMonthSearchButton.style.display = "none";
+  monthSearchSortButton.style.display = "none";
+  monthSearchSortMode = "date";
+  currentMonthSearchWords = [];
+  currentMonthSearchSummary = null;
+  monthSearchSortButton.textContent = "Sort Alphabetically";
 }
 
 function clearDayNumberSearch() {
   dayNumberDropdown.value = "";
   dayNumberSearchResults.innerHTML = "";
   closeDayNumberSearchButton.style.display = "none";
+  dayNumberSearchSortButton.style.display = "none";
+  dayNumberSearchSortMode = "date";
+  currentDayNumberSearchWords = [];
+  currentDayNumberSearchSummary = null;
+  dayNumberSearchSortButton.textContent = "Sort Alphabetically";
 }
 
 function clearMonthDaySearch() {
@@ -1511,6 +1803,11 @@ function clearMonthDaySearch() {
   monthDayDropdown.innerHTML = '<option value="">Select Day</option>';
   monthDaySearchResults.innerHTML = "";
   closeMonthDaySearchButton.style.display = "none";
+  monthDaySearchSortButton.style.display = "none";
+  monthDaySearchSortMode = "date";
+  currentMonthDaySearchWords = [];
+  currentMonthDaySearchSummary = null;
+  monthDaySearchSortButton.textContent = "Sort Alphabetically";
 }
 
 // Letter Search Functionality
@@ -1590,12 +1887,20 @@ function searchWordsByLetter(letter) {
     return entry.word.toUpperCase().startsWith(letter);
   });
 
+  // Store filtered words for sorting
+  currentLetterSearchWords = [...wordsWithLetter];
+
+  // Reset to alphabetical sort mode for new searches (default for letter search)
+  letterSearchSortMode = "alphabetical";
+
   // Clear previous results
   letterSearchResults.innerHTML = "";
 
   if (wordsWithLetter.length === 0) {
     letterSearchResults.innerHTML = `<div class="letter-search-summary">No words found starting with "${letter}"</div>`;
     closeLetterSearchButton.style.display = "block";
+    letterSearchSortButton.style.display = "none";
+    currentLetterSearchSummary = null;
     return;
   }
 
@@ -1609,57 +1914,21 @@ function searchWordsByLetter(letter) {
         ).toFixed(2)
       : "N/A";
 
-  // Add summary
-  const summaryDiv = document.createElement("div");
-  summaryDiv.className = "letter-search-summary";
-  summaryDiv.innerHTML = `
-    <strong>Letter "${letter}":</strong> ${wordsWithLetter.length} total words | 
-    ${playedWords.length} played | 
-    Average Score: ${averageScore}
-  `;
-  letterSearchResults.appendChild(summaryDiv);
+  // Store summary
+  currentLetterSearchSummary = {
+    searchType: "letter",
+    searchValue: letter,
+    totalWords: wordsWithLetter.length,
+    playedWords: playedWords.length,
+    averageScore: averageScore
+  };
 
-  // Show close button
+  // Show close button and sort button
   closeLetterSearchButton.style.display = "block";
+  letterSearchSortButton.style.display = "block";
 
-  // Sort words alphabetically by word
-  wordsWithLetter.sort((a, b) => a.word.localeCompare(b.word));
-
-  // Create word buttons
-  wordsWithLetter.forEach((entry) => {
-    const wordButton = document.createElement("button");
-    wordButton.className = "letter-word-button";
-
-    const scoreText =
-      entry.myScore === 0 ? "Not Played" : `Score: ${entry.myScore}`;
-    const scrabblePoints = calculateScrabblePoints(entry.word);
-    let scrabbleDisplayVisible = false;
-
-    const updateButtonContent = () => {
-      if (scrabbleDisplayVisible) {
-        wordButton.innerHTML = `
-          <div class="word-text">${entry.word}</div>
-          <div class="word-date">Value In Scrabble Points : '${scrabblePoints}'</div>
-        `;
-      } else {
-        wordButton.innerHTML = `
-          <div class="word-text">${entry.word}</div>
-          <div class="word-date">Word#: ${entry.wordNumber}</div>
-          <div class="word-date">${entry.gameDate}</div>
-          <div class="word-date">${scoreText}</div>
-        `;
-      }
-    };
-
-    updateButtonContent();
-
-    wordButton.addEventListener("click", () => {
-      scrabbleDisplayVisible = !scrabbleDisplayVisible;
-      updateButtonContent();
-    });
-
-    letterSearchResults.appendChild(wordButton);
-  });
+  // Render words based on current sort mode
+  renderLetterSearchWords();
 }
 
 function searchWordsByLetterRange(startLetter, endLetter) {
@@ -1677,12 +1946,20 @@ function searchWordsByLetterRange(startLetter, endLetter) {
     return firstLetter >= actualStart && firstLetter <= actualEnd;
   });
 
+  // Store filtered words for sorting
+  currentLetterSearchWords = [...wordsInRange];
+
+  // Reset to alphabetical sort mode for new searches (default for letter search)
+  letterSearchSortMode = "alphabetical";
+
   // Clear previous results
   letterSearchResults.innerHTML = "";
 
   if (wordsInRange.length === 0) {
     letterSearchResults.innerHTML = `<div class="letter-search-summary">No words found in range "${startLetter}-${endLetter}"</div>`;
     closeLetterSearchButton.style.display = "block";
+    letterSearchSortButton.style.display = "none";
+    currentLetterSearchSummary = null;
     return;
   }
 
@@ -1696,24 +1973,62 @@ function searchWordsByLetterRange(startLetter, endLetter) {
         ).toFixed(2)
       : "N/A";
 
-  // Add summary
+  // Store summary
+  currentLetterSearchSummary = {
+    searchType: "range",
+    searchValue: `${startLetter}-${endLetter}`,
+    totalWords: wordsInRange.length,
+    playedWords: playedWords.length,
+    averageScore: averageScore
+  };
+
+  // Show close button and sort button
+  closeLetterSearchButton.style.display = "block";
+  letterSearchSortButton.style.display = "block";
+
+  // Render words based on current sort mode
+  renderLetterSearchWords();
+}
+
+function renderLetterSearchWords() {
+  if (!currentLetterSearchSummary || currentLetterSearchWords.length === 0) {
+    return;
+  }
+
+  // Clear previous results but keep structure
+  letterSearchResults.innerHTML = "";
+
+  // Re-add summary
   const summaryDiv = document.createElement("div");
   summaryDiv.className = "letter-search-summary";
-  summaryDiv.innerHTML = `
-    <strong>Range "${startLetter}-${endLetter}":</strong> ${wordsInRange.length} total words | 
-    ${playedWords.length} played | 
-    Average Score: ${averageScore}
-  `;
+  if (currentLetterSearchSummary.searchType === "letter") {
+    summaryDiv.innerHTML = `
+      <strong>Letter "${currentLetterSearchSummary.searchValue}":</strong> ${currentLetterSearchSummary.totalWords} total words | 
+      ${currentLetterSearchSummary.playedWords} played | 
+      Average Score: ${currentLetterSearchSummary.averageScore}
+    `;
+  } else {
+    summaryDiv.innerHTML = `
+      <strong>Range "${currentLetterSearchSummary.searchValue}":</strong> ${currentLetterSearchSummary.totalWords} total words | 
+      ${currentLetterSearchSummary.playedWords} played | 
+      Average Score: ${currentLetterSearchSummary.averageScore}
+    `;
+  }
   letterSearchResults.appendChild(summaryDiv);
 
-  // Show close button
-  closeLetterSearchButton.style.display = "block";
+  // Create a copy for sorting
+  const sortedWords = [...currentLetterSearchWords];
 
-  // Sort words alphabetically by word
-  wordsInRange.sort((a, b) => a.word.localeCompare(b.word));
+  // Sort based on current mode
+  if (letterSearchSortMode === "date") {
+    sortedWords.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  } else {
+    // Sort alphabetically by word - default
+    sortedWords.sort((a, b) => a.word.localeCompare(b.word));
+  }
 
   // Create word buttons
-  wordsInRange.forEach((entry) => {
+  sortedWords.forEach((entry) => {
     const wordButton = document.createElement("button");
     wordButton.className = "letter-word-button";
 
@@ -1758,6 +2073,11 @@ function clearLetterSearch() {
   letterRangeControls.style.display = "none";
   letterSearchResults.innerHTML = "";
   closeLetterSearchButton.style.display = "none";
+  letterSearchSortButton.style.display = "none";
+  letterSearchSortMode = "alphabetical";
+  currentLetterSearchWords = [];
+  currentLetterSearchSummary = null;
+  letterSearchSortButton.textContent = "Sort by Date";
 }
 
 // Contain Letter(s) Search Functionality
@@ -1804,6 +2124,12 @@ function searchWordsByContainLetters(letter, exactOccurrences) {
     return occurrences === exactOccurrences;
   });
 
+  // Store filtered words for sorting
+  currentContainLetterSearchWords = [...wordsContainingLetters];
+
+  // Reset to alphabetical sort mode for new searches (default for contain letter search)
+  containLetterSearchSortMode = "alphabetical";
+
   // Clear previous results
   containLetterSearchResults.innerHTML = "";
 
@@ -1812,6 +2138,8 @@ function searchWordsByContainLetters(letter, exactOccurrences) {
       exactOccurrences !== 1 ? "s" : ""
     }</div>`;
     closeContainLetterSearchButton.style.display = "block";
+    containLetterSearchSortButton.style.display = "none";
+    currentContainLetterSearchSummary = null;
     return;
   }
 
@@ -1827,26 +2155,56 @@ function searchWordsByContainLetters(letter, exactOccurrences) {
         ).toFixed(2)
       : "N/A";
 
-  // Add summary
+  // Store summary
+  currentContainLetterSearchSummary = {
+    letter: letter,
+    exactOccurrences: exactOccurrences,
+    totalWords: wordsContainingLetters.length,
+    playedWords: playedWords.length,
+    averageScore: averageScore
+  };
+
+  // Show close button and sort button
+  closeContainLetterSearchButton.style.display = "block";
+  containLetterSearchSortButton.style.display = "block";
+
+  // Render words based on current sort mode
+  renderContainLetterSearchWords();
+}
+
+function renderContainLetterSearchWords() {
+  if (!currentContainLetterSearchSummary || currentContainLetterSearchWords.length === 0) {
+    return;
+  }
+
+  // Clear previous results but keep structure
+  containLetterSearchResults.innerHTML = "";
+
+  // Re-add summary
   const summaryDiv = document.createElement("div");
   summaryDiv.className = "contain-letter-search-summary";
   summaryDiv.innerHTML = `
-    <strong>Contains "${letter}" exactly ${exactOccurrences} time${
-    exactOccurrences !== 1 ? "s" : ""
-  }:</strong> ${wordsContainingLetters.length} total words | 
-    ${playedWords.length} played | 
-    Average Score: ${averageScore}
+    <strong>Contains "${currentContainLetterSearchSummary.letter}" exactly ${currentContainLetterSearchSummary.exactOccurrences} time${
+    currentContainLetterSearchSummary.exactOccurrences !== 1 ? "s" : ""
+  }:</strong> ${currentContainLetterSearchSummary.totalWords} total words | 
+    ${currentContainLetterSearchSummary.playedWords} played | 
+    Average Score: ${currentContainLetterSearchSummary.averageScore}
   `;
   containLetterSearchResults.appendChild(summaryDiv);
 
-  // Show close button
-  closeContainLetterSearchButton.style.display = "block";
+  // Create a copy for sorting
+  const sortedWords = [...currentContainLetterSearchWords];
 
-  // Sort words alphabetically by word
-  wordsContainingLetters.sort((a, b) => a.word.localeCompare(b.word));
+  // Sort based on current mode
+  if (containLetterSearchSortMode === "date") {
+    sortedWords.sort((a, b) => new Date(b.gameDate) - new Date(a.gameDate));
+  } else {
+    // Sort alphabetically by word - default
+    sortedWords.sort((a, b) => a.word.localeCompare(b.word));
+  }
 
   // Create word buttons
-  wordsContainingLetters.forEach((entry) => {
+  sortedWords.forEach((entry) => {
     const wordButton = document.createElement("button");
     wordButton.className = "contain-letter-word-button";
 
@@ -1887,6 +2245,11 @@ function clearContainLetterSearch() {
   containOccurrencesDropdown.value = "";
   containLetterSearchResults.innerHTML = "";
   closeContainLetterSearchButton.style.display = "none";
+  containLetterSearchSortButton.style.display = "none";
+  containLetterSearchSortMode = "alphabetical";
+  currentContainLetterSearchWords = [];
+  currentContainLetterSearchSummary = null;
+  containLetterSearchSortButton.textContent = "Sort by Date";
 }
 
 // Daily Words Search Functionality
