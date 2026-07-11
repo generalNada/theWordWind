@@ -1,6 +1,6 @@
 
 export const fixedWordsLarge = [
-    'QQQQQ', 'ZZZZZ', 'JJJJJ', 'QQZZJ', 'KKKJJ', 'JQQZZ', 'JZZQQ', 'QQJZZ', 'ZZJQQ', 'QQJZX',   
+    'QQQQQ', 'ZZZZZ', 'JJJJJ', 'QQZZJ', 'KKKJJ', 'JQQZZ', 'JZZQQ', 'QQJZZ', 'ZZJQQ', 'QQJZX' 
     'AAHED', 'AALII', 'AARGH', 'AARTI', 'ABACA', 'ABACI', 'ABACK', 'ABACS', 'ABAFT', 'ABAKA',
     'ABAMP', 'ABAND', 'ABASE', 'ABASH', 'ABASK', 'ABATE', 'ABAYA', 'ABBAS', 'ABBED', 'ABBES',
     'ABBEY', 'ABBOT', 'ABCEE', 'ABEAM', 'ABEAR', 'ABELE', 'ABERS', 'ABETS', 'ABHOR', 'ABIDE',
@@ -12,7 +12,7 @@ export const fixedWordsLarge = [
     'ACRED', 'ACRES', 'ACRID', 'ACROS', 'ACTED', 'ACTIN', 'ACTON', 'ACTOR', 'ACUTE', 'ACYLS',
     'ADAGE', 'ADAPT', 'ADAWS', 'ADAYS', 'ADDAX', 'ADDED', 'ADDER', 'ADDIE', 'ADDLE', 'ADEEM',
     'ADEPT', 'ADHAN', 'ADIEU', 'ADIOS', 'ADITS', 'ADMAN', 'ADMEN', 'ADMIN', 'ADMIT', 'ADMIX', 
-    'ADOBE',
+    'ADOBE', 
     'ADUKI', 'ADULT', 'ADUNC', 'ADUST', 'ADVEW', 'ADYTA', 'ADZED', 'ADZES', 'AECIA', 'AEGIS',
     'ADOBI', 'ADOBO', 'ADOPT', 'ADORE', 'ADORN', 'ADOWN', 'ADOZE', 'ADRAD', 'ADRED', 'ADSUM',
     'AEONS', 'AERIE', 'AEROS', 'AESIR', 'AFALD', 'AFARA', 'AFARS', 'AFEAR', 'AFFIX', 'AFIRE',
