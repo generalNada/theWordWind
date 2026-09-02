@@ -556,7 +556,7 @@ h1:active {
     rgba(100, 80, 140, 0.4) */
   );
   color: rgba(200, 240, 220, 0.95);
-  border: 1px solid rgba(160, 200, 180, 0.3);
+  border: 1px solid rgba(161, 200, 180, 0.3);
   border-radius: 12px;
   padding: 12px 25px;
   font-size: 1.2rem;
